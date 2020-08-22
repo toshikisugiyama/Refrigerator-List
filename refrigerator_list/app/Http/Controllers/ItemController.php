@@ -14,8 +14,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $item = new Item();
-        return $item->all();
+        return Item::all();
     }
 
     /**
@@ -26,7 +25,14 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Item::create([
+            "refrigerator_id" => $request->refrigerator_id,
+            "row" => $request->row,
+            "column" => $request->column,
+            "name" => $request->name,
+            "expiration_date" => $request->expiration_date,
+            "photo_url" => $request->photo_url
+        ]);
     }
 
     /**
@@ -37,7 +43,7 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
-        //
+        return Item::find($item->id);
     }
 
     /**
@@ -49,7 +55,13 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item)
     {
-        //
+        Item::find($item->id)->update([
+            "row" => $request->row,
+            "column" => $request->column,
+            "name" => $request->name,
+            "expiration_date" => $request->expiration_date,
+            "photo_url" => $request->photo_url
+        ]);
     }
 
     /**
@@ -60,6 +72,6 @@ class ItemController extends Controller
      */
     public function destroy(Item $item)
     {
-        //
+        Item::find($item->id)->delete();
     }
 }

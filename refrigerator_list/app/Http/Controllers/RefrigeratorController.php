@@ -14,8 +14,7 @@ class RefrigeratorController extends Controller
      */
     public function index()
     {
-        $refrigerator = new Refrigerator();
-        return $refrigerator->all();
+        return Refrigerator::all();
     }
 
     /**
@@ -26,7 +25,10 @@ class RefrigeratorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Refrigerator::create([
+            "user_id" => $request->user_id,
+            "rows" => $request->rows
+        ]);
     }
 
     /**
@@ -37,7 +39,7 @@ class RefrigeratorController extends Controller
      */
     public function show(Refrigerator $refrigerator)
     {
-        //
+        return Refrigerator::find($refrigerator->id);
     }
 
     /**
@@ -49,7 +51,9 @@ class RefrigeratorController extends Controller
      */
     public function update(Request $request, Refrigerator $refrigerator)
     {
-        //
+        Refrigerator::find($refrigerator->id)->update([
+            'rows' => $request->rows
+        ]);
     }
 
     /**
@@ -60,6 +64,6 @@ class RefrigeratorController extends Controller
      */
     public function destroy(Refrigerator $refrigerator)
     {
-        //
+        Refrigerator::find($refrigerator->id)->delete();
     }
 }
